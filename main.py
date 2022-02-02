@@ -5,10 +5,11 @@ RESOLUTION = 800
 SHIFT = (RESOLUTION >> 1)
 Y, X = np.mgrid[:RESOLUTION, :RESOLUTION] - SHIFT
 MY = Y-SHIFT
+MX = X+SHIFT
 
 def move_circle(event, x, y, flags, param):
     if event == cv.EVENT_MOUSEMOVE:
-        img = 100/np.sqrt((X)**2+(Y)**2) + 50/np.sqrt((X-x+SHIFT)**2+(MY+y)**2)
+        img = 100/np.sqrt((X)**2+(Y)**2) + 50/np.sqrt((MX-x)**2+(MY+y)**2)
         _, img = cv.threshold(img[::-1,:], 1, 255, cv.THRESH_BINARY)
         img = cv.GaussianBlur(img, (3,3), 0, 0)
         imgx = cv.Sobel(img, cv.CV_16S, 1, 0, ksize=3, scale=1)
