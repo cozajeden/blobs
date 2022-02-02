@@ -10,6 +10,7 @@ MX = X+SHIFT
 def move_circle(event, x, y, flags, param):
     if event == cv.EVENT_MOUSEMOVE:
         img = 100/np.sqrt((X)**2+(Y)**2) + 50/np.sqrt((MX-x)**2+(MY-y)**2)
+        img = cv.inRange(img, 0.9, 1)
         cv.imshow('image', img)
 
 cv.namedWindow('image')
